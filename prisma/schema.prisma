@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id           String     @id @default(uuid())
+  name         String     @unique
+  slug         String     @unique
+  displayOrder Int
+  description  String
+  color        String
+  testCases    TestCase[]
+  createdAt    DateTime   @default(now())
+}
+
+model Tester {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  email       String?
+  role        String           @default("tester")
+  isActive    Boolean          @default(true)
+  assignments TestAssignment[]
+  testResults TestResult[]
+  createdAt   DateTime         @default(now())
+}
+
+model TestCase {
+  id            String           @id @default(uuid())
+  categoryId    String
+  category      Category         @relation(fields: [categoryId], references: [id])
+  title         String
+  userStory     String
+  persona       String
+  testSteps     String
+  prerequisites String
+  crmNotes      String?
+  pageRef       String?
+  displayOrder  Int
+  assignments   TestAssignment[]
+  testResults   TestResult[]
+  createdAt     DateTime         @default(now())
+
+  @@index([categoryId])
+}
+
+model TestAssignment {
+  id         String   @id @default(uuid())
+  testCaseId String
+  testCase   TestCase @relation(fields: [testCaseId], references: [id], onDelete: Cascade)
+  testerId   String
+  tester     Tester   @relation(fields: [testerId], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@unique([testCaseId])
+  @@index([testerId])
+}
+
+model TestResult {
+  id         String   @id @default(uuid())
+  testCaseId String
+  testCase   TestCase @relation(fields: [testCaseId], references: [id], onDelete: Cascade)
+  testerId   String
+  tester     Tester   @relation(fields: [testerId], references: [id])
+  status     String
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  @@index([testCaseId])
+  @@index([testerId])
+  @@index([createdAt])
+}

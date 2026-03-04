@@ -1,0 +1,47 @@
+{
+  "name": "copilot-sales-testing-checklist",
+  "version": "1.0.0",
+  "description": "Interactive testing checklist for Microsoft Copilot for Sales",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:client": "vite",
+    "build": "vite build",
+    "start": "tsx server/index.ts",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset",
+    "extract-pages": "tsx scripts/extract-pdf-pages.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "@tanstack/react-query": "^5.67.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "fast-csv": "^5.0.2",
+    "lucide-react": "^0.474.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.2.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "pdf-to-png-converter": "^3.14.0",
+    "postcss": "^8.5.3",
+    "prisma": "^6.4.1",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0"
+  }
+}
