@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_microsoft-docs_microsoft-learn__microsoft_docs_fetch",
+      "WebFetch(domain:www.prisma.io)",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:tanstack.com)",
+      "WebFetch(domain:workos.com)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}
