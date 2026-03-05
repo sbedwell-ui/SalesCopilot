@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { PrismaClient } from '@prisma/client';
 import { categoriesRouter } from './routes/categories.js';
 import { testCasesRouter } from './routes/test-cases.js';
@@ -30,6 +32,16 @@ app.use('/api/export', exportRouter);
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
+
+// In production, serve the Vite build output and handle client-side routing
+if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const distPath = path.join(__dirname, '..', 'dist');
+  app.use(express.static(distPath));
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

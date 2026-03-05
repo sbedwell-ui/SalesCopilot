@@ -7,8 +7,9 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "tsx watch server/index.ts",
     "dev:client": "vite",
-    "build": "vite build",
-    "start": "tsx server/index.ts",
+    "build": "vite build && prisma generate",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "db:deploy": "prisma migrate deploy",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
@@ -25,6 +26,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.2.0",
+    "prisma": "^6.4.1",
+    "tsx": "^4.19.3",
     "zod": "^3.24.2"
   },
   "devDependencies": {
@@ -38,9 +41,7 @@
     "concurrently": "^9.1.2",
     "pdf-to-png-converter": "^3.14.0",
     "postcss": "^8.5.3",
-    "prisma": "^6.4.1",
     "tailwindcss": "^3.4.17",
-    "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "vite": "^6.2.0"
   }
