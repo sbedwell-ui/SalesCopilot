@@ -10,6 +10,7 @@ export interface SeedTestCase {
   prerequisites: string; // JSON array
   crmNotes: string | null;
   pageRef: string | null;
+  priority?: string; // "High" | "Medium" | "Low"
   displayOrder: number;
 }
 

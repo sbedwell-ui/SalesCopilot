@@ -49,6 +49,7 @@ async function main() {
           prerequisites: tc.prerequisites,
           crmNotes: tc.crmNotes,
           pageRef: tc.pageRef,
+          priority: tc.priority ?? 'Medium',
           displayOrder: tc.displayOrder,
         },
       });
@@ -64,6 +65,7 @@ async function main() {
           prerequisites: tc.prerequisites,
           crmNotes: tc.crmNotes,
           pageRef: tc.pageRef,
+          priority: tc.priority ?? 'Medium',
           displayOrder: tc.displayOrder,
         },
       });

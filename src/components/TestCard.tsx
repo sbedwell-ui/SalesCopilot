@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import StatusBadge from './StatusBadge';
+import PriorityBadge from './PriorityBadge';
 import type { TestCase, TestStatus } from '../lib/types';
 
 interface TestCardProps {
@@ -44,6 +45,7 @@ export default function TestCard({ testCase, selectable, selected, onToggle }: T
         </div>
       </div>
 
+      <PriorityBadge priority={testCase.priority} />
       <StatusBadge status={status} />
 
       <Link to={`/test/${testCase.id}`} className="text-data3-text-muted hover:text-white">

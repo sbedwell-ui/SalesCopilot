@@ -26,6 +26,11 @@ export const api = {
 
   // Test cases
   getTestCase: (id: string) => request<import('./types').TestCase>(`/test-cases/${id}`),
+  updateTestCase: (id: string, data: { priority?: string }) =>
+    request<import('./types').TestCase>(`/test-cases/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
 
   // Testers
   getTesters: () => request<import('./types').Tester[]>('/testers'),

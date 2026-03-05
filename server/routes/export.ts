@@ -33,6 +33,7 @@ exportRouter.get('/csv', async (_req, res) => {
       csvStream.write({
         Category: tc.category.name,
         'Test Case': tc.title,
+        Priority: tc.priority,
         Persona: tc.persona,
         'Assigned To': assignee,
         Status: latestResult?.status || 'untested',

@@ -38,6 +38,7 @@ export interface TestCase {
   prerequisites: string; // JSON array
   crmNotes: string | null;
   pageRef: string | null;
+  priority: string;
   displayOrder: number;
   assignments?: TestAssignment[];
   testResults?: TestResult[];
@@ -93,3 +94,4 @@ export interface ResultsPage {
 }
 
 export type TestStatus = 'pass' | 'fail' | 'blocked' | 'untested';
+export type Priority = 'High' | 'Medium' | 'Low';

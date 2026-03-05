@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, BookOpen, ClipboardCheck, FileImage, User } from 'lucide-react';
+import { ArrowLeft, BookOpen, ClipboardCheck, FileImage, Flag, User } from 'lucide-react';
 import { api } from '../lib/api';
 import { parsePageRef, pageImageUrl } from '../lib/parsePageRef';
 import StatusBadge from '../components/StatusBadge';
+import PriorityBadge from '../components/PriorityBadge';
 import TesterPicker from '../components/TesterPicker';
 import PageThumbnail from '../components/PageThumbnail';
 import ImageLightbox from '../components/ImageLightbox';
-import type { TestCase, TestStatus } from '../lib/types';
+import type { TestCase, TestStatus, Priority } from '../lib/types';
 
 export default function TestDetail() {
   const { id } = useParams<{ id: string }>();
@@ -43,6 +44,15 @@ export default function TestDetail() {
       setStatus('');
       setNotes('');
       setTesterId('');
+    },
+  });
+
+  const priorityMutation = useMutation({
+    mutationFn: ({ id, priority }: { id: string; priority: string }) =>
+      api.updateTestCase(id, { priority }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['testCase', id] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
     },
   });
 
@@ -99,7 +109,10 @@ export default function TestDetail() {
             {testCase.pageRef && <span>PDF {testCase.pageRef}</span>}
           </div>
         </div>
-        <StatusBadge status={currentStatus} />
+        <div className="flex items-center gap-2">
+          <PriorityBadge priority={testCase.priority} />
+          <StatusBadge status={currentStatus} />
+        </div>
       </div>
 
       {/* User story */}
@@ -158,6 +171,34 @@ export default function TestDetail() {
               onChange={handleAssign}
             />
           </div>
+        </div>
+      </div>
+
+      {/* Priority */}
+      <div className="bg-data3-card border border-data3-border-light rounded-lg p-4 shadow-md shadow-black/15">
+        <div className="flex items-center gap-2 text-sm font-medium text-data3-text-muted mb-2">
+          <Flag size={14} />
+          Priority
+        </div>
+        <div className="flex gap-2">
+          {(['High', 'Medium', 'Low'] as Priority[]).map((p) => (
+            <button
+              key={p}
+              onClick={() => priorityMutation.mutate({ id: testCase.id, priority: p })}
+              disabled={priorityMutation.isPending}
+              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+                testCase.priority === p
+                  ? p === 'High'
+                    ? 'bg-red-900/30 border-red-500/50 text-red-400'
+                    : p === 'Medium'
+                    ? 'bg-yellow-900/30 border-yellow-500/50 text-yellow-400'
+                    : 'bg-data3-surface-light border-data3-border-light text-data3-text-muted'
+                  : 'border-data3-border text-data3-text-muted hover:bg-data3-surface-light'
+              }`}
+            >
+              {p}
+            </button>
+          ))}
         </div>
       </div>
 
