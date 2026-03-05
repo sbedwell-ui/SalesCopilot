@@ -37,12 +37,13 @@ export default function Layout() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-data3-background">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-4 border-b border-gray-200">
-          <h1 className="text-lg font-bold text-gray-900">Copilot for Sales</h1>
-          <p className="text-xs text-gray-500 mt-0.5">Testing Checklist v8.1</p>
+      <aside className="w-64 bg-data3-surface border-r border-data3-border flex flex-col">
+        <div className="p-4 border-b border-data3-border">
+          <img src="/SalesCopilotLogo.png" alt="Copilot for Sales" className="h-8 mb-2" />
+          <h1 className="text-lg font-bold text-white">Copilot for Sales</h1>
+          <p className="text-xs text-data3-text-muted mt-0.5">Testing Checklist</p>
         </div>
 
         <nav className="flex-1 overflow-y-auto p-3 space-y-1">
@@ -54,8 +55,8 @@ export default function Layout() {
               className={({ isActive }) =>
                 `flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-data3-surface-light text-data3-accent'
+                    : 'text-data3-text-muted hover:bg-data3-surface-light hover:text-white'
                 }`
               }
             >
@@ -65,7 +66,7 @@ export default function Layout() {
           ))}
 
           <div className="pt-3 pb-1">
-            <p className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <p className="px-3 text-xs font-semibold text-data3-text-muted uppercase tracking-wider">
               Categories
             </p>
           </div>
@@ -77,8 +78,8 @@ export default function Layout() {
               className={({ isActive }) =>
                 `flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-data3-surface-light text-data3-accent'
+                    : 'text-data3-text-muted hover:bg-data3-surface-light hover:text-white'
                 }`
               }
             >
@@ -88,7 +89,7 @@ export default function Layout() {
               />
               <span className="truncate">{cat.name}</span>
               {cat.stats && (
-                <span className="ml-auto text-xs text-gray-400">
+                <span className="ml-auto text-xs text-data3-text-muted">
                   {cat.stats.passed}/{cat.stats.total}
                 </span>
               )}
@@ -96,10 +97,10 @@ export default function Layout() {
           ))}
         </nav>
 
-        <div className="p-3 border-t border-gray-200">
+        <div className="p-3 border-t border-data3-border">
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+            className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium text-data3-text-muted hover:bg-data3-surface-light hover:text-white transition-colors"
           >
             <Download size={18} />
             Export CSV

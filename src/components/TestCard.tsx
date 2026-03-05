@@ -16,37 +16,37 @@ export default function TestCard({ testCase, selectable, selected, onToggle }: T
   const assignee = testCase.assignments?.[0]?.tester?.name;
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
+    <div className="flex items-center gap-3 px-4 py-3 bg-data3-card border border-data3-border-light rounded-lg shadow-md shadow-black/15 hover:border-data3-accent/40 transition-colors">
       {selectable && (
         <input
           type="checkbox"
           checked={selected}
           onChange={() => onToggle?.(testCase.id)}
-          className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          className="w-4 h-4 rounded border-data3-border"
         />
       )}
 
       <div className="flex-1 min-w-0">
         <Link
           to={`/test/${testCase.id}`}
-          className="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors"
+          className="text-sm font-medium text-white hover:text-data3-accent transition-colors"
         >
           {testCase.title}
         </Link>
         <div className="flex items-center gap-3 mt-1">
-          <span className="text-xs text-gray-500">{testCase.persona}</span>
+          <span className="text-xs text-data3-text-muted">{testCase.persona}</span>
           {assignee && (
-            <span className="text-xs text-gray-400">Assigned: {assignee}</span>
+            <span className="text-xs text-data3-text-muted">Assigned: {assignee}</span>
           )}
           {testCase.pageRef && (
-            <span className="text-xs text-gray-400">{testCase.pageRef}</span>
+            <span className="text-xs text-data3-text-muted">{testCase.pageRef}</span>
           )}
         </div>
       </div>
 
       <StatusBadge status={status} />
 
-      <Link to={`/test/${testCase.id}`} className="text-gray-400 hover:text-gray-600">
+      <Link to={`/test/${testCase.id}`} className="text-data3-text-muted hover:text-white">
         <ChevronRight size={16} />
       </Link>
     </div>

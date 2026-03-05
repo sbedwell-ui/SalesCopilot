@@ -1,10 +1,10 @@
 import type { TestStatus } from '../lib/types';
 
 const config: Record<TestStatus, { label: string; bg: string; text: string }> = {
-  pass: { label: 'Pass', bg: 'bg-green-100', text: 'text-green-700' },
-  fail: { label: 'Fail', bg: 'bg-red-100', text: 'text-red-700' },
-  blocked: { label: 'Blocked', bg: 'bg-yellow-100', text: 'text-yellow-700' },
-  untested: { label: 'Untested', bg: 'bg-gray-100', text: 'text-gray-500' },
+  pass: { label: 'Pass', bg: 'bg-green-900/30', text: 'text-green-400' },
+  fail: { label: 'Fail', bg: 'bg-red-900/30', text: 'text-red-400' },
+  blocked: { label: 'Blocked', bg: 'bg-yellow-900/30', text: 'text-yellow-400' },
+  untested: { label: 'Untested', bg: 'bg-data3-surface-light', text: 'text-data3-text-muted' },
 };
 
 export default function StatusBadge({ status }: { status: TestStatus }) {

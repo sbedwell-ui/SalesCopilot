@@ -33,8 +33,8 @@ export default function CategoryView() {
     },
   });
 
-  if (isLoading) return <div className="p-8 text-gray-500">Loading...</div>;
-  if (!category) return <div className="p-8 text-red-500">Category not found</div>;
+  if (isLoading) return <div className="p-8 text-data3-text-muted">Loading...</div>;
+  if (!category) return <div className="p-8 text-red-400">Category not found</div>;
 
   const testCases = category.testCases || [];
   const stats = {
@@ -74,9 +74,9 @@ export default function CategoryView() {
           className="w-4 h-4 rounded-full"
           style={{ backgroundColor: category.color }}
         />
-        <h2 className="text-2xl font-bold text-gray-900">{category.name}</h2>
+        <h2 className="text-2xl font-bold text-white">{category.name}</h2>
       </div>
-      <p className="text-sm text-gray-500">{category.description}</p>
+      <p className="text-sm text-data3-text-muted">{category.description}</p>
 
       <ProgressBar
         total={stats.total}
@@ -90,7 +90,7 @@ export default function CategoryView() {
       <div className="flex items-center gap-3">
         <button
           onClick={() => setShowBulk(!showBulk)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 text-gray-600"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-data3-border rounded-lg hover:bg-data3-surface-light text-data3-text-muted"
         >
           <Users size={14} />
           Bulk Assign
@@ -98,25 +98,25 @@ export default function CategoryView() {
 
         {showBulk && (
           <>
-            <label className="flex items-center gap-1.5 text-sm text-gray-600">
+            <label className="flex items-center gap-1.5 text-sm text-data3-text-muted">
               <input
                 type="checkbox"
                 checked={selectedIds.size === testCases.length && testCases.length > 0}
                 onChange={selectAll}
-                className="rounded border-gray-300 text-blue-600"
+                className="rounded border-data3-border"
               />
               Select all
             </label>
             {selectedIds.size > 0 && (
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">{selectedIds.size} selected</span>
+                <span className="text-sm text-data3-text-muted">{selectedIds.size} selected</span>
                 <div className="w-48">
                   <TesterPicker value={bulkTesterId} onChange={setBulkTesterId} />
                 </div>
                 <button
                   onClick={handleBulkAssign}
                   disabled={!bulkTesterId || bulkMutation.isPending}
-                  className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                  className="px-3 py-1.5 text-sm bg-data3-accent text-white rounded-lg hover:bg-data3-accent/80 disabled:opacity-50"
                 >
                   {bulkMutation.isPending ? 'Assigning...' : 'Assign'}
                 </button>

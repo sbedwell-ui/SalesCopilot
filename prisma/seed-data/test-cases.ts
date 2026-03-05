@@ -852,7 +852,7 @@ const flowOfWork: SeedTestCase[] = [
       'Salesforce Account with team members',
     ]),
     crmNotes: 'Salesforce: Account Team members may be auto-suggested from the Salesforce Account Team.',
-    pageRef: 'p67-70',
+    pageRef: 'p67-71',
     displayOrder: 3,
   },
   {
@@ -873,7 +873,7 @@ const flowOfWork: SeedTestCase[] = [
       'Open Salesforce Opportunity',
     ]),
     crmNotes: 'Salesforce: Deal Room pulls Opportunity fields and related Contacts.',
-    pageRef: 'p71-73',
+    pageRef: 'p72-73',
     displayOrder: 4,
   },
   {

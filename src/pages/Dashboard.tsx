@@ -17,11 +17,11 @@ export default function Dashboard() {
   });
 
   if (isLoading) {
-    return <div className="p-8 text-gray-500">Loading dashboard...</div>;
+    return <div className="p-8 text-data3-text-muted">Loading dashboard...</div>;
   }
 
   if (!dashboard) {
-    return <div className="p-8 text-red-500">Failed to load dashboard</div>;
+    return <div className="p-8 text-red-400">Failed to load dashboard</div>;
   }
 
   const { overall, recentResults, testerStats } = dashboard;
@@ -30,31 +30,31 @@ export default function Dashboard() {
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
-        <p className="text-sm text-gray-500 mt-1">Copilot for Sales V8.1 Testing Progress</p>
+        <h2 className="text-2xl font-bold text-white">Dashboard</h2>
+        <p className="text-sm text-data3-text-muted mt-1">Copilot for Sales V8.1 Testing Progress</p>
       </div>
 
       {/* Overall stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {[
-          { label: 'Total', value: overall.total, color: 'text-gray-900' },
-          { label: 'Passed', value: overall.passed, color: 'text-green-600' },
-          { label: 'Failed', value: overall.failed, color: 'text-red-600' },
-          { label: 'Blocked', value: overall.blocked, color: 'text-yellow-600' },
-          { label: 'Untested', value: overall.untested, color: 'text-gray-400' },
+          { label: 'Total', value: overall.total, color: 'text-white' },
+          { label: 'Passed', value: overall.passed, color: 'text-green-400' },
+          { label: 'Failed', value: overall.failed, color: 'text-red-400' },
+          { label: 'Blocked', value: overall.blocked, color: 'text-yellow-400' },
+          { label: 'Untested', value: overall.untested, color: 'text-data3-text-muted' },
         ].map(({ label, value, color }) => (
-          <div key={label} className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</p>
+          <div key={label} className="bg-data3-card rounded-lg border border-data3-border-light p-4 shadow-md shadow-black/15">
+            <p className="text-xs font-medium text-data3-text-muted uppercase tracking-wider">{label}</p>
             <p className={`text-2xl font-bold mt-1 ${color}`}>{value}</p>
           </div>
         ))}
       </div>
 
       {/* Overall progress */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-data3-card rounded-lg border border-data3-border-light p-4 shadow-md shadow-black/15">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-medium text-gray-700">Overall Progress</p>
-          <p className="text-sm font-bold text-gray-900">{completionPct}%</p>
+          <p className="text-sm font-medium text-data3-text-muted">Overall Progress</p>
+          <p className="text-sm font-bold text-white">{completionPct}%</p>
         </div>
         <ProgressBar
           total={overall.total}
@@ -66,14 +66,14 @@ export default function Dashboard() {
       </div>
 
       {/* Category breakdown */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
-        <h3 className="text-sm font-semibold text-gray-700 mb-3">Categories</h3>
+      <div className="bg-data3-card rounded-lg border border-data3-border-light p-4 shadow-md shadow-black/15">
+        <h3 className="text-sm font-semibold text-data3-text-muted mb-3">Categories</h3>
         <div className="space-y-3">
           {categories?.map((cat) => (
             <Link
               key={cat.slug}
               to={`/category/${cat.slug}`}
-              className="block hover:bg-gray-50 rounded-lg p-2 -mx-2 transition-colors"
+              className="block hover:bg-data3-surface-light rounded-lg p-2 -mx-2 transition-colors"
             >
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
@@ -81,9 +81,9 @@ export default function Dashboard() {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: cat.color }}
                   />
-                  <span className="text-sm font-medium text-gray-900">{cat.name}</span>
+                  <span className="text-sm font-medium text-white">{cat.name}</span>
                 </div>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-data3-text-muted">
                   {cat.stats?.passed ?? 0}/{cat.stats?.total ?? 0}
                 </span>
               </div>
@@ -102,19 +102,19 @@ export default function Dashboard() {
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Recent activity */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">Recent Activity</h3>
+        <div className="bg-data3-card rounded-lg border border-data3-border-light p-4 shadow-md shadow-black/15">
+          <h3 className="text-sm font-semibold text-data3-text-muted mb-3">Recent Activity</h3>
           {recentResults.length === 0 ? (
-            <p className="text-sm text-gray-400">No test results yet</p>
+            <p className="text-sm text-data3-text-muted">No test results yet</p>
           ) : (
             <div className="space-y-2">
               {recentResults.map((r) => (
                 <div key={r.id} className="flex items-center gap-2 text-sm">
                   <StatusBadge status={r.status as TestStatus} />
-                  <Link to={`/test/${r.testCaseId}`} className="text-gray-700 hover:text-blue-600 truncate flex-1">
+                  <Link to={`/test/${r.testCaseId}`} className="text-white hover:text-data3-accent truncate flex-1">
                     {r.testCase?.title}
                   </Link>
-                  <span className="text-xs text-gray-400 flex-shrink-0">
+                  <span className="text-xs text-data3-text-muted flex-shrink-0">
                     {r.tester?.name}
                   </span>
                 </div>
@@ -124,19 +124,19 @@ export default function Dashboard() {
         </div>
 
         {/* Tester stats */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">Tester Progress</h3>
+        <div className="bg-data3-card rounded-lg border border-data3-border-light p-4 shadow-md shadow-black/15">
+          <h3 className="text-sm font-semibold text-data3-text-muted mb-3">Tester Progress</h3>
           {testerStats.length === 0 ? (
-            <p className="text-sm text-gray-400">No testers assigned yet</p>
+            <p className="text-sm text-data3-text-muted">No testers assigned yet</p>
           ) : (
             <div className="space-y-2">
               {testerStats.map((t) => (
                 <div key={t.id} className="flex items-center justify-between text-sm">
-                  <span className="text-gray-700 font-medium">{t.name}</span>
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                  <span className="text-white font-medium">{t.name}</span>
+                  <div className="flex items-center gap-3 text-xs text-data3-text-muted">
                     <span>{t.assigned} assigned</span>
-                    <span className="text-green-600">{t.passed} pass</span>
-                    <span className="text-red-600">{t.failed} fail</span>
+                    <span className="text-green-400">{t.passed} pass</span>
+                    <span className="text-red-400">{t.failed} fail</span>
                   </div>
                 </div>
               ))}

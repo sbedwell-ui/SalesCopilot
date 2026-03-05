@@ -51,7 +51,7 @@ export default function Testers() {
     createMutation.mutate({ name: name.trim(), email: email.trim() || undefined });
   };
 
-  if (isLoading) return <div className="p-8 text-gray-500">Loading...</div>;
+  if (isLoading) return <div className="p-8 text-data3-text-muted">Loading...</div>;
 
   const activeTesters = testers?.filter((t) => t.isActive) ?? [];
   const inactiveTesters = testers?.filter((t) => !t.isActive) ?? [];
@@ -59,10 +59,10 @@ export default function Testers() {
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Testers</h2>
+        <h2 className="text-2xl font-bold text-white">Testers</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-data3-accent text-white rounded-lg hover:bg-data3-accent/80"
         >
           <Plus size={14} />
           Add Tester
@@ -70,41 +70,41 @@ export default function Testers() {
       </div>
 
       {showForm && (
-        <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
+        <div className="bg-data3-card border border-data3-border-light rounded-lg shadow-md shadow-black/15 p-4 space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Name *</label>
+            <label className="block text-xs font-medium text-data3-text-muted mb-1">Name *</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="block w-full rounded-md border-gray-300 shadow-sm text-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-md bg-data3-surface-light border-data3-border text-white text-sm focus:border-data3-accent focus:ring-data3-accent"
               placeholder="Tester name"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Email (optional)</label>
+            <label className="block text-xs font-medium text-data3-text-muted mb-1">Email (optional)</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="block w-full rounded-md border-gray-300 shadow-sm text-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-md bg-data3-surface-light border-data3-border text-white text-sm focus:border-data3-accent focus:ring-data3-accent"
               placeholder="tester@example.com"
             />
           </div>
           {createMutation.isError && (
-            <p className="text-sm text-red-600">{(createMutation.error as Error).message}</p>
+            <p className="text-sm text-red-400">{(createMutation.error as Error).message}</p>
           )}
           <div className="flex gap-2">
             <button
               onClick={handleCreate}
               disabled={!name.trim() || createMutation.isPending}
-              className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="px-3 py-1.5 text-sm bg-data3-accent text-white rounded-lg hover:bg-data3-accent/80 disabled:opacity-50"
             >
               {createMutation.isPending ? 'Creating...' : 'Create'}
             </button>
             <button
               onClick={() => setShowForm(false)}
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 text-gray-600"
+              className="px-3 py-1.5 text-sm border border-data3-border rounded-lg hover:bg-data3-surface-light text-data3-text-muted"
             >
               Cancel
             </button>
@@ -117,11 +117,11 @@ export default function Testers() {
         {activeTesters.map((t) => (
           <div
             key={t.id}
-            className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3"
+            className="flex items-center justify-between bg-data3-card border border-data3-border-light rounded-lg shadow-md shadow-black/15 px-4 py-3"
           >
             <div>
-              <p className="text-sm font-medium text-gray-900">{t.name}</p>
-              <div className="flex items-center gap-3 mt-0.5 text-xs text-gray-500">
+              <p className="text-sm font-medium text-white">{t.name}</p>
+              <div className="flex items-center gap-3 mt-0.5 text-xs text-data3-text-muted">
                 {t.email && <span>{t.email}</span>}
                 <span className="capitalize">{t.role}</span>
                 <span>{t._count?.assignments ?? 0} assigned</span>
@@ -131,7 +131,7 @@ export default function Testers() {
             {t.role !== 'system' && (
               <button
                 onClick={() => setRemovingTester(t)}
-                className="flex items-center gap-1 px-2 py-1 text-xs rounded text-red-600 bg-red-50 hover:bg-red-100"
+                className="flex items-center gap-1 px-2 py-1 text-xs rounded text-red-400 bg-red-900/30 hover:bg-red-900/50"
               >
                 <Trash2 size={12} />
                 Remove
@@ -144,17 +144,17 @@ export default function Testers() {
       {/* Inactive testers */}
       {inactiveTesters.length > 0 && (
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider pt-2">
+          <h3 className="text-sm font-semibold text-data3-text-muted uppercase tracking-wider pt-2">
             Inactive Testers ({inactiveTesters.length})
           </h3>
           {inactiveTesters.map((t) => (
             <div
               key={t.id}
-              className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 opacity-60"
+              className="flex items-center justify-between bg-data3-card border border-data3-border-light rounded-lg shadow-md shadow-black/15 px-4 py-3 opacity-60"
             >
               <div>
-                <p className="text-sm font-medium text-gray-400">{t.name}</p>
-                <div className="flex items-center gap-3 mt-0.5 text-xs text-gray-400">
+                <p className="text-sm font-medium text-data3-text-muted">{t.name}</p>
+                <div className="flex items-center gap-3 mt-0.5 text-xs text-data3-text-muted">
                   {t.email && <span>{t.email}</span>}
                   <span className="capitalize">{t.role}</span>
                   <span>{t._count?.assignments ?? 0} assigned</span>
@@ -164,7 +164,7 @@ export default function Testers() {
               <button
                 onClick={() => reactivateMutation.mutate(t.id)}
                 disabled={reactivateMutation.isPending}
-                className="flex items-center gap-1 px-2 py-1 text-xs rounded text-green-700 bg-green-50 hover:bg-green-100"
+                className="flex items-center gap-1 px-2 py-1 text-xs rounded text-green-400 bg-green-900/30 hover:bg-green-900/50"
               >
                 <UserPlus size={12} />
                 Re-add
@@ -178,48 +178,48 @@ export default function Testers() {
       {removingTester && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div
-            className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6 space-y-4"
+            className="bg-data3-surface rounded-xl shadow-2xl max-w-md w-full mx-4 p-6 space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                <AlertTriangle size={20} className="text-red-600" />
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-900/30 flex items-center justify-center">
+                <AlertTriangle size={20} className="text-red-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Remove Tester</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="text-lg font-semibold text-white">Remove Tester</h3>
+                <p className="text-sm text-data3-text-muted">
                   Remove <strong>{removingTester.name}</strong> from the active team?
                 </p>
               </div>
             </div>
 
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-data3-text-muted">
               Choose whether to keep or clear their existing test results. Assignments will be preserved in either case.
             </p>
 
             {deleteMutation.isError && (
-              <p className="text-sm text-red-600">{(deleteMutation.error as Error).message}</p>
+              <p className="text-sm text-red-400">{(deleteMutation.error as Error).message}</p>
             )}
 
             <div className="flex flex-col gap-2">
               <button
                 onClick={() => deleteMutation.mutate({ id: removingTester.id, clearResults: false })}
                 disabled={deleteMutation.isPending}
-                className="w-full px-4 py-2 text-sm font-medium bg-yellow-50 border border-yellow-300 text-yellow-700 rounded-lg hover:bg-yellow-100 disabled:opacity-50"
+                className="w-full px-4 py-2 text-sm font-medium bg-yellow-900/30 border border-yellow-500/50 text-yellow-400 rounded-lg hover:bg-yellow-900/50 disabled:opacity-50"
               >
                 {deleteMutation.isPending ? 'Removing...' : 'Remove & Keep Results'}
               </button>
               <button
                 onClick={() => deleteMutation.mutate({ id: removingTester.id, clearResults: true })}
                 disabled={deleteMutation.isPending}
-                className="w-full px-4 py-2 text-sm font-medium bg-red-50 border border-red-300 text-red-700 rounded-lg hover:bg-red-100 disabled:opacity-50"
+                className="w-full px-4 py-2 text-sm font-medium bg-red-900/30 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-900/50 disabled:opacity-50"
               >
                 {deleteMutation.isPending ? 'Removing...' : 'Remove & Clear Results'}
               </button>
               <button
                 onClick={() => setRemovingTester(null)}
                 disabled={deleteMutation.isPending}
-                className="w-full px-4 py-2 text-sm font-medium border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50"
+                className="w-full px-4 py-2 text-sm font-medium border border-data3-border text-data3-text-muted rounded-lg hover:bg-data3-surface-light"
               >
                 Cancel
               </button>

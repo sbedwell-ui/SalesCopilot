@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: 218 100% 19%;
+  --foreground: 0 0% 100%;
+  --border: 218 50% 33%;
+}
+
+body {
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+}
+
+/* Form control accent for checkboxes and radios */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #6dcff6;
+}
+
+/* Dark placeholder text */
+::placeholder {
+  color: #b0c4de80;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a3080;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6dcff6;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8dd8f8;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

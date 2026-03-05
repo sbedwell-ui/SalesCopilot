@@ -22,7 +22,7 @@ export default function TesterPicker({ value, onChange, excludeSystem = true }: 
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="block w-full rounded-md border-gray-300 shadow-sm text-sm focus:border-blue-500 focus:ring-blue-500"
+      className="block w-full rounded-md bg-data3-surface-light border-data3-border text-white text-sm focus:border-data3-accent focus:ring-data3-accent"
     >
       <option value="">Select tester...</option>
       {filtered?.map((t) => (
